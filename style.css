@@ -1,69 +1,82 @@
-body {
-    font: 10px "Helvetica Neue", Helvetica, Arial, sans-serif;
-}
-
-.axis path,
-.axis line {
-    fill: none;
-    stroke: #000;
-    shape-rendering: crispEdges;
-}
-
-.x.axis path {
-    display: none;
-}
-
-.graph-area {
-    fill: #e0e6ff;
-    stroke-width: 1.5px;
-    stroke: rgb(32, 84, 228);
-}
-
-.node-circle {
-    fill: #0833e2;
-    stroke-width: 1.5px;
-    stroke: rgb(32, 84, 228);
-}
-
-.overlay {
-    fill: none;
-    pointer-events: all;
-}
-
-.hover-line {
-    stroke: #5d79f8;
-    stroke-width: 1px;
-    stroke-dasharray: 3, 3;
-}
-
-.tooltip-label1,
-.tooltip-label2 {
-    font-weight: bold;
-    font-size: 12px;
-    fill: rgb(85, 85, 85);
-}
-
-.total-label {
-    font-weight: bold;
-    font-size: 18px;
-    fill: rgb(85, 85, 85);
-}
-
-.tooltip-value1,
-.tooltip-value3 {
-    font-weight: bold;
-    font-size: 18px;
-    fill: rgb(0, 0, 0);
-}
-
-.tooltip-value2 {
-    font-weight: bold;
-    font-size: 14px;
-    fill: rgb(0, 0, 0);
-}
-
-.total-value {
-    font-weight: bold;
-    font-size: 20px;
-    fill: rgb(37, 37, 37);
-}
+    body {
+        font: 10px "Helvetica Neue", Helvetica, Arial, sans-serif;
+    }
+    
+    .axis path,
+    .axis line {
+        fill: none;
+        stroke: #000;
+        shape-rendering: crispEdges;
+    }
+    
+    .x.axis path {
+        display: none;
+    }
+    
+    .graph-area {
+        fill: #e0e6ff;
+        stroke-width: 1.5px;
+        stroke: rgb(32, 84, 228);
+    }
+    
+    .node-circle {
+        fill: #0833e2;
+        stroke-width: 3px;
+        stroke: rgb(255, 255, 255);
+    }
+    
+    .overlay {
+        fill: none;
+        pointer-events: all;
+    }
+    
+    .hover-line {
+        stroke: #5d79f8;
+        stroke-width: 1px;
+        stroke-dasharray: 3, 3;
+    }
+    
+    .hover-pane {
+        stroke: #ffffff;
+        stroke-width: 1px;
+        fill: white;
+        opacity: 0.5;
+    }
+    
+    .hover-pane1 {
+        stroke: #ffffff;
+        stroke-width: 1px;
+        fill: white;
+    }
+    
+    .tooltip-label1,
+    .tooltip-label2 {
+        font-weight: bold;
+        font-size: 12px;
+        fill: rgb(85, 85, 85);
+    }
+    
+    .total-label {
+        font-weight: bold;
+        font-size: 18px;
+        fill: rgb(85, 85, 85);
+    }
+    
+    .tooltip-value1,
+    .tooltip-value3 {
+        font-weight: bold;
+        font-size: 18px;
+        fill: rgb(0, 0, 0);
+    }
+    
+    .tooltip-value2 {
+        font-weight: bold;
+        font-size: 14px;
+        fill: rgb(0, 0, 0);
+    }
+    
+    .total-value {
+        font-weight: bold;
+        font-size: 20px;
+        fill: rgb(37, 37, 37);
+    }

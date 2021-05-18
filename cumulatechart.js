@@ -46,9 +46,49 @@ function cumulateChart(config) {
             .domain([0, d3.max(source, function(d) { return Math.max(+d.value2); })])
             .range([height, 0]);
 
+        var defs = svg.append("defs");
+
+        var lg = defs.append("linearGradient")
+            .attr("id", "mygrad")
+            .attr("x1", "0%")
+            .attr("x2", "0%")
+            .attr("y1", "0%")
+            .attr("y2", "100%");
+        lg.append("stop")
+            .attr("offset", "0%")
+            .style("stop-color", "#e0e6ff")
+            .style("stop-opacity", 1)
+
+        lg.append("stop")
+            .attr("offset", "100%")
+            .style("stop-color", "#f4f5f8")
+            .style("stop-opacity", 1)
+
+        var filter = defs.append("filter")
+            .attr("id", "drop-shadow")
+            .attr("height", "130%");
+
+        filter.append("feGaussianBlur")
+            .attr("in", "SourceAlpha")
+            .attr("stdDeviation", 5)
+            .attr("result", "blur");
+
+        filter.append("feOffset")
+            .attr("in", "blur")
+            .attr("dx", 0)
+            .attr("dy", 0)
+            .attr("result", "offsetBlur");
+
+        var feMerge = filter.append("feMerge");
+
+        feMerge.append("feMergeNode")
+            .attr("in", "offsetBlur")
+        feMerge.append("feMergeNode")
+            .attr("in", "SourceGraphic");
+
         chart = svg.append("path")
             .datum(data)
-            .attr("class", "typgraph-areae")
+            .attr("class", "graph-area")
             .attr("d", d3.line()
                 .x(function(d) { return x(d.date) })
                 .y(function(d) { return y(0) })
@@ -63,12 +103,12 @@ function cumulateChart(config) {
                 .y0(y(0))
                 .y1(function(d) { return y(d.value2) })
             )
-
-        makeTooltip(data);
+            .style("fill", "url(#mygrad)");
 
         setTimeout(function(t) {
             showCircle(data);
             showTotalInfo(data);
+            makeTooltip(data);
         }, 1000);
     });
 
@@ -79,14 +119,23 @@ function cumulateChart(config) {
 
         focus.append("line")
             .attr("class", "hover-line")
-            .attr("y1", 0)
-            .attr("y2", height);
+            .attr("y1", -30)
+            .attr("y2", height + 30);
 
-        focus.append("text").attr("class", "tooltip-label1").attr("x", -20).attr("y", -100);
-        focus.append("text").attr("class", "tooltip-value1").attr("x", -20).attr("y", -70);
-        focus.append("text").attr("class", "tooltip-value2").attr("x", 40).attr("y", -72);
-        focus.append("text").attr("class", "tooltip-label2").attr("x", -20).attr("y", -50);
-        focus.append("text").attr("class", "tooltip-value3").attr("x", -20).attr("y", -25);
+        focus.append("path")
+            .attr("class", "hover-pane")
+            .attr("d", function() { return "M 0,-30 l -6,-8 -30,0 l 0,-120 172,0 0,120 -130,0 -6,8" })
+            .style("filter", "url(#drop-shadow)")
+
+        focus.append("path")
+            .attr("class", "hover-pane1")
+            .attr("d", function() { return "M 0,-30 l -6,-8 -30,0 l 0,-120 172,0 0,120 -130,0 -6,8" })
+
+        focus.append("text").attr("class", "tooltip-label1").attr("x", -20).attr("y", -130);
+        focus.append("text").attr("class", "tooltip-value1").attr("x", -20).attr("y", -100);
+        focus.append("text").attr("class", "tooltip-value2").attr("x", 40).attr("y", -102);
+        focus.append("text").attr("class", "tooltip-label2").attr("x", -20).attr("y", -80);
+        focus.append("text").attr("class", "tooltip-value3").attr("x", -20).attr("y", -55);
 
         svg.append("rect")
             .attr("class", "overlay")
